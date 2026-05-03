@@ -1,4 +1,4 @@
-name: compilación nocturna
+name: Compilación Nocturna
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     - cron: '0 23 * * *'
 
 jobs:
-  nightly_build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,11 +20,14 @@ jobs:
           java-version: '8'
           cache: 'maven'
 
-      - name: Build con Maven
-        run: mvn -Dmaven.test.skip=true clean package
+      - name: Ejecutar Unit Tests
+        run: mvn clean test
 
-      - name: Upload artifact
+      - name: Build WAR
+        run: mvn clean package -DskipTests
+
+      - name: Subir artefacto WAR
         uses: actions/upload-artifact@v4
         with:
-          name: digibank.war
-          path: ./target/*digitalbank*.war
+          name: digitalbank-war
+          path: target/*.war
