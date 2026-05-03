@@ -2,7 +2,7 @@ name: compilación nocturna
 
 on:
 push:
-  schedule:
+schedule:
     - cron: '0 23 * * *'
 
 jobs:
