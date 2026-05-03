@@ -338,7 +338,6 @@
 			            <exclude>**/*SearchTest.java</exclude>
 			        </excludes>
 			        <forkCount>2</forkCount>
-			    </configuration>rgLine>
                 </configuration>
             </plugin>
             <plugin>
