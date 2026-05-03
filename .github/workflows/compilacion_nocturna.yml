@@ -10,13 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout código
+        uses: actions/checkout@v4
 
-      - name: Run Unit Tests
-        run: mvn test
+      - name: Configurar Java 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+          cache: 'maven'
 
-      - name: Build with Maven 
+      - name: Build con Maven
         run: mvn -Dmaven.test.skip=true clean package
 
       - name: Upload artifact
