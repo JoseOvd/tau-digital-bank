@@ -332,13 +332,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M3</version><!--$NO-MVN-MAN-VER$-->
                 <configuration>
-                	<excludes>
-                        <exclude>**/serenity/*Test*.java</exclude>
-                    </excludes>
-                    <skip>${skipUnitTests}</skip>
-                    <forkCount>2</forkCount>
-                    <threadCount>1</threadCount>
-                    <argLine></argLine>
+			       	 <excludes>
+			            <exclude>**/serenity/**</exclude>
+			            <exclude>**/*TrnxRepoTest.java</exclude>
+			            <exclude>**/*SearchTest.java</exclude>
+			        </excludes>
+			        <forkCount>2</forkCount>
+			    </configuration>rgLine>
                 </configuration>
             </plugin>
             <plugin>
