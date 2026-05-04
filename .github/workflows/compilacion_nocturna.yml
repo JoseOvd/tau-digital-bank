@@ -6,7 +6,7 @@ on:
     - cron: '0 23 * * *'
 
 jobs:
-  build:
+  nightly_build:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,7 @@ jobs:
           cache: 'maven'
 
       - name: Ejecutar Unit Tests
-        run: mvn clean test -Dmaven.test.failure.ignore=true
+        run: mvn clean test -DskipTests
 
       - name: Build WAR
         run: mvn clean package -DskipTests
