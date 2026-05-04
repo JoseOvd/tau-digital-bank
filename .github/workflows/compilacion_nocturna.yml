@@ -20,13 +20,10 @@ jobs:
           java-version: '8'
           cache: 'maven'
 
-      - name: Ejecutar Unit Tests
-        run: mvn clean test -DskipTests
-
-      - name: Build WAR
-        run: mvn clean package -DskipTests
+      - name: Build Maven
+        run: mvn -Dmaven.test.skip=true clean package
         
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@v4
         with:
           name: digitalbank-war
           path: ./target/*digitalbank*.war
