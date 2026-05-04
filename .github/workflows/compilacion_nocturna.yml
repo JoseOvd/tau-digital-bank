@@ -25,9 +25,8 @@ jobs:
 
       - name: Build WAR
         run: mvn clean package -DskipTests
-
-      - name: Subir artefacto WAR
-        uses: actions/upload-artifact@v4
+        
+      - uses: actions/upload-artifact@master
         with:
           name: digitalbank-war
-          path: target/*.war
+          path: ./target/*digitalbank*.war
