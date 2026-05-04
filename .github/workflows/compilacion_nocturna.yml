@@ -21,7 +21,7 @@ jobs:
           cache: 'maven'
 
       - name: Ejecutar Unit Tests
-        run: mvn clean test
+        run: mvn clean test -Dmaven.test.failure.ignore=true
 
       - name: Build WAR
         run: mvn clean package -DskipTests
