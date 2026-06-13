@@ -2,8 +2,12 @@ name: PR check naming convention
 
 on:
   pull_request:
-    types: ['opened', 'edited', 'reopened', 'synchronize']
+    types: [opened, edited, reopened, synchronize]
 
+permissions:
+  pull-requests: write
+  contents: read
+  
 jobs:
   pr-lint:
     runs-on: ubuntu-latest
@@ -12,15 +16,3 @@ jobs:
       with:
         title-regex: '^TAU-\d+\s.+'
         error-message: 'Add Ticket ID to your title e.g. "TAU-1"' 
-
-  scan-pr-changes:
-    runs-on: ubuntu-latest
-    name: Annotates pull request with metadata
-    steps:
-      - name: Annotate PR
-        uses: tau-github-actions-for-testing/tau-own-action-pull-request@main
-        with:
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
-          pr_number: ${{ github.event.number }}
-          token: ${{ secrets.PAT_TOKEN }}
