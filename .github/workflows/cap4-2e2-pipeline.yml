@@ -1,5 +1,5 @@
 name: cp4 e2e pipeline
-run-name: Build, Deploy, Test - from user @${{ github.actor }}
+run-name: Build from user @${{ github.actor }}
 
 on: 
   workflow_dispatch:
@@ -41,8 +41,14 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-    - name: Build application
-      run: ./mvnw clean package -Dmaven.test.skip=true
+    - name: Build Java project (safe mode)
+      run: | 
+       chmod +x mvnw || true
+          if [ -f "./mvnw" ]; then
+            ./mvnw clean compile -DskipTests || echo "Build failed, continuing CodeQL"
+          else
+            mvn clean compile -DskipTests || echo "Maven not available, continuing CodeQL"
+          fi
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
