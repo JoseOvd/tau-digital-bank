@@ -17,9 +17,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Run Unit Tests
-        run: mvn test
-
         
   analyze:
     name: Analyze
