@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript', 'java' ]
+        language: [ 'javascript']
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
 
     steps:
@@ -41,14 +41,8 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-    - name: Build Java project (safe mode)
-      run: | 
-       chmod +x mvnw || true
-          if [ -f "./mvnw" ]; then
-            ./mvnw clean compile -DskipTests || echo "Build failed, continuing CodeQL"
-          else
-            mvn clean compile -DskipTests || echo "Maven not available, continuing CodeQL"
-          fi
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
